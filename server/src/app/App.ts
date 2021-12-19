@@ -10,7 +10,7 @@ class App {
 		this.app.use(express.json());
 		this.app.use(express.urlencoded());
 
-		this.app.use('/api', router);
+		this.app.use('/', router);
 	}
 
 	listen(port: number) {
