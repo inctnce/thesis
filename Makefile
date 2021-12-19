@@ -16,6 +16,8 @@ prod-down:
 
 push:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml push
+pull:
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml pull
 
 clean:
 	docker rmi $(docker images) -f
