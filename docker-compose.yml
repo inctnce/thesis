@@ -6,10 +6,9 @@ services:
       context: ./server
       dockerfile: Dockerfile
       target: dev
-    image: inctnce/time-gen-server-dev
+    image: inctnce/time-gen-server
     volumes:
-      - ./server:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./server:/usr/src/app/src
     container_name: server
     expose:
       - 4000
@@ -22,13 +21,24 @@ services:
       context: ./client
       dockerfile: Dockerfile
       target: dev
-    image: inctnce/time-gen-client-dev
+    image: inctnce/time-gen-client
     volumes:
-      - ./client:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./client:/usr/src/app/src
     container_name: client
     expose:
       - 3000
     ports:
       - 3000:80
     command: npm run dev
+  
+  nginx:
+    image: nginx:1.17.10
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+        - 80:80
+        - 443:443
+    depends_on:
+        - server
+        - client
