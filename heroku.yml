@@ -1,0 +1,13 @@
+build:
+  client: 
+    build: client/Dockerfile
+    ports:
+      - 3000:3000
+      
+  server: 
+    build: server/Dockerfile
+    ports:
+      - 4000:4000
+run:
+  client: npm start
+  server: npm start

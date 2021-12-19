@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  server:
+    build:
+      target: prod
+    command: npm start
+  
+  client:
+    build:
+      target: prod
+    command: npm start
