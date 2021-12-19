@@ -1,0 +1,89 @@
+{
+	"workdays": ["Понедельник", "Вторник", "Среда", "Четверг", "Суббота"],
+	"intervals": ["09:30 - 11:05", "11:15 - 12:50", "13:40 - 15:15", "15:25 - 17:00"],
+	"teachers": [
+		"Тихомирова м. А.",
+		"Молодцова Г. И.",
+		"Станкова Е. Н.",
+		"Корхов В. В.",
+		"Лежнина Е. А.",
+		"Хараг Н. Б.",
+		"Гурьянов М. И.",
+		"Севостьянов Р. А.",
+		"Вольф Д. А."
+	],
+	"disciplines": [
+		{
+			"name": "Психология",
+			"numOfLessons": 1,
+			"teachers": [0],
+			"numOfStudents": 30
+		},
+		{
+			"name": "Педагогика",
+			"numOfLessons": 1,
+			"teachers": [1],
+			"numOfStudents": 25
+		},
+		{
+			"name": "Распределенные методы обработки информации",
+			"numOfLessons": 1,
+			"teachers": [2],
+			"numOfStudents": 40
+		},
+		{
+			"name": "Основы Grid",
+			"numOfLessons": 1,
+			"teachers": [3],
+			"numOfStudents": 30
+		},
+		{
+			"name": "Основы организации бизнеса",
+			"numOfLessons": 1,
+			"teachers": [4],
+			"numOfStudents": 30
+		},
+		{
+			"name": "Углубленный курс английского языка",
+			"numOfLessons": 2,
+			"teachers": [5],
+			"numOfStudents": 30
+		},
+		{
+			"name": "Безопасность жизнедеятельности",
+			"numOfLessons": 1,
+			"teachers": [6],
+			"numOfStudents": 30
+		},
+		{
+			"name": "Интернет вещей",
+			"numOfLessons": 1,
+			"teachers": [7],
+			"numOfStudents": 30
+		},
+		{
+			"name": "Интеллектуальные системы",
+			"numOfLessons": 2,
+			"teachers": [8],
+			"numOfStudents": 30
+		}
+	],
+	"rooms": [
+		{
+			"name": "R1",
+			"capacity": 25
+		},
+		{
+			"name": "R2",
+			"capacity": 30
+		},
+		{
+			"name": "R3",
+			"capacity": 20
+		},
+		{
+			"name": "R4",
+			"capacity": 45
+		}
+	]
+}

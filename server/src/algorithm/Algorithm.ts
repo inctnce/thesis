@@ -18,12 +18,15 @@ class Algorithm {
 	solve(): Schedule[] {
 		let population = new Population(this.POPULATION_SIZE, this.data);
 		let numOfGenerations = 0;
+
+		population.displaySchedules();
+
 		do {
 			numOfGenerations++;
 
-			console.log('Generation: ', numOfGenerations);
-			population.displaySchedules();
-			console.log('#'.repeat(50));
+			// console.log('Generation: ', numOfGenerations);
+			// population.displaySchedules();
+			// console.log('#'.repeat(50));
 
 			population = this.evolve(population);
 			population.Schedules = population.Schedules.sort((s1, s2) => s1.fitness - s2.fitness).reverse();
@@ -81,9 +84,8 @@ class Algorithm {
 	selectTournamentPopulation = (population: Population): Population => {
 		const tournamentPopulation = new Population(0, this.data);
 
-		for (let i = 0; i < this.TOURNAMENT_SELECTION_SIZE; i++) {
+		for (let i = 0; i < this.TOURNAMENT_SELECTION_SIZE; i++)
 			tournamentPopulation.Schedules.push(population.Schedules[randInt(0, population.Schedules.length - 1)]);
-		}
 
 		tournamentPopulation.Schedules = tournamentPopulation.Schedules.sort((s1, s2) => s1.fitness - s2.fitness).reverse();
 

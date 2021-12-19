@@ -1,62 +1,62 @@
 import Data from './Data';
 import randInt from '../helpers/random';
 import Lesson from '../models/Lesson';
-import TWorkday from '../types/TWorkday';
 
 class Schedule {
 	data: Data;
 	lessons: Lesson[] = [];
-	numOfConflicts: number = 0;
-	lessonNumber: number = 0;
 
 	constructor(data: Data) {
 		this.data = data;
 	}
 
 	generateLessons() {
+		let lessonNumber = 0;
+
 		for (let i = 0; i < this.data.disciplines.length; i++) {
 			for (let j = 0; j < this.data.disciplines[i].NumOfLessons; j++) {
 				this.lessons.push(
 					new Lesson(
-						this.lessonNumber.toString(),
+						lessonNumber.toString(),
 						this.data.disciplines[i],
 						this.data.lessonTimes[randInt(0, this.data.lessonTimes.length - 1)],
 						this.data.rooms[randInt(0, this.data.rooms.length - 1)],
 						this.data.disciplines[i].Teachers[randInt(0, this.data.disciplines[i].Teachers.length - 1)],
 					),
 				);
-				this.lessonNumber++;
+				lessonNumber++;
 			}
 		}
 	}
 
 	get fitness() {
-		this.numOfConflicts = 0;
+		let numOfConflicts = 0;
 
 		for (let i = 0; i < this.lessons.length; i++) {
 			if (this.lessons[i].Room.Capacity < this.lessons[i].Discipline.NumOfStudents) {
-				this.numOfConflicts++;
+				numOfConflicts++;
 			}
 			for (let j = 0; j < this.lessons.length; j++) {
 				if (j > i) {
 					// console.log("Lesson 1: ", this.lessons[i]);
 					// console.log("Lesson 2: ", this.lessons[j]);
 					if (
-						this.lessons[i].Time.interval === this.lessons[j].Time.interval &&
+						this.lessons[i].Time.Interval === this.lessons[j].Time.Interval &&
+						this.lessons[i].Time.Workday === this.lessons[j].Time.Workday &&
 						this.lessons[i].ID !== this.lessons[j].ID
 					) {
 						if (this.lessons[i].Room.ID === this.lessons[j].Room.ID) {
-							this.numOfConflicts++;
+							numOfConflicts++;
 						}
 						if (this.lessons[i].Teacher.ID === this.lessons[j].Teacher.ID) {
-							this.numOfConflicts++;
+							numOfConflicts++;
 						}
 					}
 				}
 			}
 		}
 
-		return 1 / (this.numOfConflicts + 1);
+		return 1 / (numOfConflicts + 1);
 	}
 
 	displayRoomSchedule(roomName: string): void {
@@ -66,7 +66,7 @@ class Schedule {
 				.map((lesson) => ({
 					Room: lesson.Room?.Name,
 					Lesson: lesson?.Name,
-					Time: lesson.Time.interval,
+					Time: lesson.Time.Interval,
 					Teacher: lesson.Teacher?.Name,
 					Discipline: lesson.Discipline?.Name,
 				})),
@@ -80,14 +80,31 @@ class Schedule {
 				.map((lesson) => ({
 					Teacher: lesson.Teacher?.Name,
 					Lesson: lesson?.Name,
-					Time: lesson.Time.interval,
+					Time: lesson.Time.Interval,
 					Discipline: lesson.Discipline?.Name,
 					Room: lesson.Room?.Name,
 				})),
 		);
 	}
 
-	displayWeekSchedule(workday: TWorkday): void {}
+	displayWeekSchedule(): void {
+		for (const workday of this.data.workdays) {
+			console.log(workday);
+			for (const room of this.data.rooms) {
+				console.log(room.Name);
+				console.table(
+					this.lessons
+						.filter((lesson) => lesson.Time.Workday === workday)
+						.filter((lesson) => lesson.Room.ID === room.ID)
+						.map((lesson) => ({
+							Time: lesson.Time.Interval,
+							Discipline: lesson.Discipline.Name,
+							Teacher: lesson.Teacher.Name,
+						})),
+				);
+			}
+		}
+	}
 }
 
 export default Schedule;

@@ -23,13 +23,13 @@ class Population {
 			console.table(
 				schedule.lessons.map((lesson) => ({
 					Name: lesson.Name,
-					Time: lesson.Time.interval,
+					Time: lesson.Time.Interval,
 					Teacher: lesson.Teacher.Name,
 					Discipline: lesson.Discipline.Name,
 					Room: lesson.Room.Name,
 				})),
 			);
-			console.log('Number of conflicts: ', schedule.numOfConflicts);
+			console.log('Fitness: ', schedule.fitness);
 		});
 	}
 }

@@ -1,14 +1,14 @@
 import TWorkday from '../types/TWorkday';
 
 class LessonTime {
-	readonly interval: string;
-	readonly workday: TWorkday;
+	readonly Interval: string;
+	readonly Workday: TWorkday;
 
 	constructor(workday: TWorkday, interval: string) {
 		this.validate(interval);
 
-		this.workday = workday;
-		this.interval = interval;
+		this.Workday = workday;
+		this.Interval = interval;
 	}
 
 	private validate(interval: string) {

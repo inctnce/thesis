@@ -4,9 +4,11 @@ services:
   server:
     build:
       target: prod
+    image: inctnce/time-gen-server
     command: npm start
   
   client:
     build:
       target: prod
+    image: inctnce/time-gen-client
     command: npm start
