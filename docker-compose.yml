@@ -10,6 +10,7 @@ services:
     volumes:
       - ./server:/usr/src/app/src
     container_name: server
+    restart: always
     expose:
       - 4000
     ports:
@@ -25,6 +26,7 @@ services:
     volumes:
       - ./client:/usr/src/app/src
     container_name: client
+    restart: always
     expose:
       - 3000
     ports:
